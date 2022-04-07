@@ -41,12 +41,12 @@ function preprocess {
     #------------------------------------------------------------------------------ 
     # Install needed packages
     #------------------------------------------------------------------------------ 
-    apt-get -y install \
+    sudo apt-get -y install \
         autoconf \
         automake \
         bison \
         build-essential \
-        flex
+        flex \
         g++ \
         git \
         ksh \
@@ -84,6 +84,7 @@ function install_cde {
 function set_display_manager {
     #------------------------------------------------------------------------------ 
     # Set default display manager 
+    # WIP: dtlogin is not working properly after reboot.
     #------------------------------------------------------------------------------ 
     sudo mv /etc/X11/default-display-manager /etc/X11/default-display-manager.bu
     sudo echo "/usr/dt/bin/dtlogin" > /etc/X11/default-display-manager
@@ -106,7 +107,9 @@ function improve_fonts {
 #------------------------------------------------------------------------------ 
 function set_motif_lookandfeel {
     mkdir -p ${HOME}/.themes
-    unzip ./resources/gtk/cdetheme1.3.tar.gz ${HOME}/.themes/
+    tar -C ${HOME}/.themes/ zxvf ./resources/gtk/cdetheme1.3.tar.gz 
+    ln -s ${HOME}/.themes/cdetheme1.3/cdetheme ${HOME}/.themes/cdetheme
+    cp ./resources/gtk/settings.ini ${HOME}/.config/gtk-3.0/
 }
 
 function add_additional_software {
@@ -122,9 +125,16 @@ function add_additional_software {
     sudo snap install xv --edge
 }
 
-preprocess
-install_cde
-set_display_manager
-improve_fonts
+
+function print_info {
+    echo "Install Firefox CDE look and feel add-on:"
+    echo "https://addons.mozilla.org/en-US/firefox/addon/cde/" 
+}
+
+# preprocess
+# install_cde
+# set_display_manager
+# improve_fonts
 set_motif_lookandfeel
-add_additional_software
+# add_additional_software
+print_info
