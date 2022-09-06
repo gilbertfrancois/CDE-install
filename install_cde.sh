@@ -41,7 +41,8 @@ function preprocess {
     #------------------------------------------------------------------------------ 
     # Install needed packages
     #------------------------------------------------------------------------------ 
-    sudo apt-get -y install \
+    sudo apt install --reinstall ca-certificates
+    sudo apt -y install \
         autoconf \
         automake \
         bison \
@@ -60,6 +61,7 @@ function preprocess {
         x11proto-fonts-dev \
         xbitmaps \
         xfonts-{100,75}dpi{,-transcoded} \
+		opensp \
         xorg 
 }
 
@@ -69,6 +71,7 @@ function install_cde {
     # Compile and install CDE
     #------------------------------------------------------------------------------ 
     pushd /tmp
+	rm -rf cdesktopenv-code
 
     git clone https://git.code.sf.net/p/cdesktopenv/code cdesktopenv-code
     cd cdesktopenv-code/cde
@@ -122,9 +125,8 @@ function add_additional_software {
 
     sudo apt install snapd
     sudo snap install core
-    sudo snap install xv --edge
+    sudo snap install xv --edge --devmode
 }
-
 
 function print_info {
     echo "Install Firefox CDE look and feel add-on:"
