@@ -131,10 +131,10 @@ function print_info {
     echo "https://addons.mozilla.org/en-US/firefox/addon/cde/" 
 }
 
-# preprocess
-# install_cde
+preprocess
+install_cde
 # set_display_manager
-# improve_fonts
+improve_fonts
 set_motif_lookandfeel
-# add_additional_software
+add_additional_software
 print_info
