@@ -60,8 +60,8 @@ function preprocess {
         tcl-dev \
         x11proto-fonts-dev \
         xbitmaps \
+	opensp \
         xfonts-{100,75}dpi{,-transcoded} \
-		opensp \
         xorg 
 }
 
@@ -75,10 +75,11 @@ function install_cde {
 
     git clone https://git.code.sf.net/p/cdesktopenv/code cdesktopenv-code
     cd cdesktopenv-code/cde
+    git checkout 2.5.0
 
     ./autogen.sh
     ./configure
-    make -j4
+    make
     sudo make install
 
     popd
